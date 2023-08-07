@@ -1,0 +1,5 @@
+build/
+Deployment/**
+!Deployment/keepme.txt
+.cache
+.vscode/
