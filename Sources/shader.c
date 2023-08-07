@@ -55,8 +55,7 @@ static void update(void *data) {
   kinc_g4_set_float(i_time_loc_g, 0);
   kinc_g4_draw_indexed_vertices();
 
-  // Draw call that on Linux gets ignored (unable to capture with renderdoc) and
-  // on Windows results in not drawing (but able to capture with renderdoc)
+  // Draw call that results in not drawing (but able to capture with renderdoc)
   kinc_g4_set_pipeline(&pipeline_b);
   kinc_g4_set_vertex_buffer(&vertices);
   kinc_g4_set_index_buffer(&indices);
