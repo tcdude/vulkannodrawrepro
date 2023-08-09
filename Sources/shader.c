@@ -12,8 +12,10 @@
 #include "data_bad.h"
 #include "data_good.h"
 
-static kinc_g4_shader_t vertex_shader;
-static kinc_g4_shader_t fragment_shader;
+static kinc_g4_shader_t vertex_shader_g;
+static kinc_g4_shader_t fragment_shader_g;
+static kinc_g4_shader_t vertex_shader_b;
+static kinc_g4_shader_t fragment_shader_b;
 static kinc_g4_pipeline_t pipeline_g;
 static kinc_g4_pipeline_t pipeline_b;
 static kinc_g4_vertex_buffer_t vertices;
@@ -95,12 +97,12 @@ int kickstart(int argc, char **argv) {
   kinc_g4_vertex_structure_add(&structure, "vertex_uv",
                                KINC_G4_VERTEX_DATA_FLOAT2);
   {
-    load_shader("good.vert", &vertex_shader, KINC_G4_SHADER_TYPE_VERTEX);
-    load_shader("good.frag", &fragment_shader, KINC_G4_SHADER_TYPE_FRAGMENT);
+    load_shader("good.vert", &vertex_shader_g, KINC_G4_SHADER_TYPE_VERTEX);
+    load_shader("good.frag", &fragment_shader_g, KINC_G4_SHADER_TYPE_FRAGMENT);
 
     kinc_g4_pipeline_init(&pipeline_g);
-    pipeline_g.vertex_shader = &vertex_shader;
-    pipeline_g.fragment_shader = &fragment_shader;
+    pipeline_g.vertex_shader = &vertex_shader_g;
+    pipeline_g.fragment_shader = &fragment_shader_g;
     pipeline_g.input_layout[0] = &structure;
     pipeline_g.input_layout[1] = NULL;
     pipeline_g.blend_source = KINC_G4_BLEND_SOURCE_ALPHA;
@@ -121,12 +123,12 @@ int kickstart(int argc, char **argv) {
   }
 
   {
-    load_shader("bad.vert", &vertex_shader, KINC_G4_SHADER_TYPE_VERTEX);
-    load_shader("bad.frag", &fragment_shader, KINC_G4_SHADER_TYPE_FRAGMENT);
+    load_shader("bad.vert", &vertex_shader_b, KINC_G4_SHADER_TYPE_VERTEX);
+    load_shader("bad.frag", &fragment_shader_b, KINC_G4_SHADER_TYPE_FRAGMENT);
 
     kinc_g4_pipeline_init(&pipeline_b);
-    pipeline_b.vertex_shader = &vertex_shader;
-    pipeline_b.fragment_shader = &fragment_shader;
+    pipeline_b.vertex_shader = &vertex_shader_b;
+    pipeline_b.fragment_shader = &fragment_shader_b;
     pipeline_b.input_layout[0] = &structure;
     pipeline_b.input_layout[1] = NULL;
     pipeline_b.blend_source = KINC_G4_BLEND_SOURCE_ALPHA;
